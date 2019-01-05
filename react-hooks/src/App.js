@@ -14,9 +14,12 @@ function App() {
 
   const { count, incrementCount } = useCounter({ initialState, step: 3 });
 
-  useEffect(() => {
-    window.localStorage.setItem("counter", count);
-  });
+  useEffect(
+    () => {
+      window.localStorage.setItem("counter", count);
+    },
+    [count]
+  );
 
   return (
     <div className="container">
