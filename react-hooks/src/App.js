@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function useCounter({ initialState, step }) {
@@ -8,7 +8,16 @@ function useCounter({ initialState, step }) {
 }
 
 function App() {
-  const { count, incrementCount } = useCounter({ initialState: 5, step: 3 });
+  // lazy initialisation
+  const initialState = () =>
+    Number(window.localStorage.getItem("counter")) || 0;
+
+  const { count, incrementCount } = useCounter({ initialState, step: 3 });
+
+  useEffect(() => {
+    window.localStorage.setItem("counter", count);
+  });
+
   return (
     <div className="container">
       <button className="button" onClick={incrementCount}>
