@@ -28,13 +28,31 @@ function StopWatch() {
     setRunning(false);
   }
 
+  return { handleRunClick, handleClearClick, lapse, running };
+}
+
+function Timer() {
+  const stopWatchOne = StopWatch();
+  const stopWatchTwo = StopWatch();
+
   return (
     <>
-      <p>{lapse}ms</p>
-      <button onClick={handleRunClick}>{running ? "Stop" : "Start"}</button>
-      <button onClick={handleClearClick}>clear</button>
+      <p>{stopWatchOne.lapse}ms</p>
+      <button onClick={stopWatchOne.handleRunClick}>
+        {stopWatchOne.running ? "Stop" : "Start"}
+      </button>
+      <button onClick={stopWatchOne.handleClearClick}>clear</button>
+      <hr />
+      <strong>Time lapse difference:</strong>
+      {stopWatchOne.lapse - stopWatchTwo.lapse}ms
+      <hr />
+      <p>{stopWatchTwo.lapse}ms</p>
+      <button onClick={stopWatchTwo.handleRunClick}>
+        {stopWatchTwo.running ? "Stop" : "Start"}
+      </button>
+      <button onClick={stopWatchTwo.handleClearClick}>clear</button>
     </>
   );
 }
 
-export default StopWatch;
+export default Timer;

@@ -8,7 +8,8 @@
   "dependencies": {
     "react": "next",
     "react-dom": "next",
-    "react-testing-library": "^5.4.4"
+    "react-testing-library": "^5.4.4",
+    "react-tilt": "^0.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
