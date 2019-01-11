@@ -1,0 +1,76 @@
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="text/babel">
+  const rootElement = document.getElementById('root');
+
+
+  class UserCompany extends React.Component {
+
+    state = {
+      loaded: false,
+      error: '',
+      company: this.props.company || 'unknown'
+    }
+
+    componentDidMount() {
+      axios({
+        url: 'http://api.github.com/graphql',
+        method: 'post',
+        data: {
+          query: `{
+            user(login: "${this.props.username}") {
+              company
+            }
+          }`
+        },
+        headers: {Authentication: `bearer 4ed14a8e01c5365e082e4176c068d12520aba7e2`},
+      })
+      .then(response => (
+        this.setState({ company: response.data.data.user.company })
+      ))
+      .catch(error => {
+        console.log(new Error(error));
+
+        this.setState({error: 'network error'});
+      })
+
+      // setTimeout(() => {
+      //   this.setState({
+      //     loaded: true,
+      //     company: 'jezwilliams ltd'
+      //   })
+      // }, 1000);
+    }
+
+    render() {
+      const { loaded, error, company } = this.state;
+      const username = loaded ? company || 'unknown' : '...';
+      return (
+        <div>
+          {error
+            ? <span>{error}</span>
+            : <span>{username}</span>
+          }
+        </div>
+      );
+    }
+  }
+
+  const username = 'jezfx';
+  const element = (
+    <div>
+      jez works at <UserCompany username={username} />
+    </div>
+  )
+
+
+  ReactDOM.render(element, rootElement);
+
+</script>
+
+

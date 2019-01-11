@@ -1,0 +1,45 @@
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+<script type="text/babel">
+  // function component
+  function SayHello(props) {
+    return (
+      <div>
+        Hello {props.firstName} {props.lastName}
+      </div>
+    )
+  }
+
+  // const propTypes = {
+  //   firstName(props, propName, componentName) {
+  //     if(typeof props[propName] !== 'string') {
+  //       return new Error('you should pass a string')
+  //     }
+  //   }
+  // }
+
+  const PropTypes = {
+    string(props, propName, componentName) {
+      if(typeof props[propName] !== 'string') {
+        return new Error('you should pass a string')
+      }
+    }
+  }
+
+  SayHello.propTypes = {
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+  }
+
+
+  ReactDOM.render(
+    <SayHello firstName={true} />,
+    document.getElementById('root')
+  )
+</script>
+
+

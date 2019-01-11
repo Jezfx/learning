@@ -1,0 +1,31 @@
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+<script type="text/babel">
+  const rootElement = document.getElementById("root");
+  // const element = document.createElement('div');
+  // element.textContent = "hello world";
+  // element.className = 'container';
+  // rootElement.appendChild(element);
+
+  // const content = 'Hello world';
+  // const myClassName = 'container';
+
+  const props = {
+    children: 'Hello World',
+    className: 'container'
+  };
+
+  // This is now an interpolation and you're getting taken out of Babel land and into Javascript and back into Babel
+  const element = <div className="myclassname" {...props} />; // default or override depending on what side the spread is
+
+  console.log(element); // react Symbol
+
+  ReactDOM.render(element, rootElement);
+
+</script>
+
+
