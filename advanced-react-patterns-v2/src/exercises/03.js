@@ -83,13 +83,15 @@ class Toggle extends React.Component {
   )
 
   toggle = () => {
+    console.log('here')
+
     this.setState(
       ({on}) => ({on: !on}),
       () => this.props.onToggle(this.state.on),
     )
   }
 
-  state = {on: false, onToggle: this.onToggle}
+  state = {on: false, toggle: this.toggle}
 
   render() {
     // Because this.props.children is _immediate_ children only, we need
