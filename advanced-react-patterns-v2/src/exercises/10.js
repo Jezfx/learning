@@ -14,6 +14,14 @@ class Toggle extends React.Component {
   // It can accept a string called `prop` and should return
   // true if that prop is controlled
   // 💰 this.props[prop] !== undefined
+
+  getState = () => {
+    return {
+      on:
+        this.props.on !== 'undefined' ? this.props.on : this.state.on,
+    }
+  }
+
   //
   // 🐨 Now let's add a function that can return the state
   // whether it's coming from this.state or this.props
@@ -33,8 +41,7 @@ class Toggle extends React.Component {
   render() {
     // 🐨 rather than getting state from this.state,
     // let's use our `getState` method.
-    const {on} = this.state
-    return <Switch on={on} onClick={this.toggle} />
+    return <Switch on={this.getState().on} onClick={this.toggle} />
   }
 }
 
@@ -65,11 +72,7 @@ class Usage extends React.Component {
           onToggle={this.handleToggle}
           ref={toggle1Ref}
         />
-        <Toggle
-          on={bothOn}
-          onToggle={this.handleToggle}
-          ref={toggle2Ref}
-        />
+        <Toggle onToggle={this.handleToggle} ref={toggle2Ref} />
       </div>
     )
   }
